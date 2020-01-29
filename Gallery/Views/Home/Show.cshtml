@@ -1,9 +1,13 @@
-﻿@model Gallery.Models.Photo
-
+﻿
 @{
     ViewBag.Title = "Show";
 }
 
-<h2>Show</h2>
-<img src="@Model.Path" alt="Nothing"/>
-
+<h2>New photo</h2>
+@using (Html.BeginForm())
+{
+    <p>Id: @Html.TextBox("Id")</p>
+    <p>Name: @Html.TextBox("Name")</p>
+    <p>Path: @Html.TextBox("Path")</p>
+    <intput typeof="submit" value="Add Photo"/>
+}
