@@ -1,36 +1,32 @@
 ﻿using System;
-using System.ComponentModel;
-using System.Drawing;
+using System.Data.Entity;
+using System.ComponentModel.DataAnnotations;
 
 namespace Gallery.Models
 {
     [Serializable]
-    public class Photo : IDataErrorInfo
+    public class Photo
     {
-        public Photo(string name, string path)
+        public Photo()
         {
-            this.Picture = Image.FromFile(path);
+
         }
 
-        public string this[string columnName]
+        private Photo(string name)
         {
-            get
-            {
-                if (string.IsNullOrWhiteSpace(columnName))
-                {
-                    return "Please, enter correct value";
-                }
-
-                return null;
-            }
+            this.Name = name;
         }
+
+        public Photo(string name, string path) : this(name)
+        {
+            this.Path = path;
+        }
+
+        [Key]
+        public int Id { get; set; }
 
         public string Name { get; set; }
 
         public string Path { get; set; }
-
-        public Image Picture { get; set; }
-
-        public string Error { get { return null; } }
     }
 }
