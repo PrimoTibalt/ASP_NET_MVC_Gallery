@@ -38,17 +38,23 @@ namespace Gallery.Controllers
             return View();
         }
 
+        [AcceptVerbs(HttpVerbs.Get)]
         public ActionResult Show()
         {
-            Photo ph = new Photo("Clouds", @"https://i.artfile.me/wallpaper/06-10-2017/1920x1080/priroda-oblaka-clouds-nebo-sky-1244838.jpg");
-            Photo ph0 = new Photo("Clouds", @"https://www.tokkoro.com/picsup/5767333-clouds-wallpapers.jpg");
+            return View("Show");
+        }
+
+        [AcceptVerbs(HttpVerbs.Post)]
+        public ActionResult Show(Photo ph)
+        {
             using (MyContext context = new MyContext())
             {
                 context.Photoes.Add(ph);
-                context.Photoes.Add(ph0);
                 context.SaveChanges();
             }
-            return View("Show", ph);
+
+            this.Index();
+            return View("Index");
         }
     }
 }
